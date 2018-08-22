@@ -11,7 +11,7 @@ namespace Quan_Ly_Bao_Tang.ViewModel
     {
         public LoginViewModel()
         {
-            
+            this
         }
     }
 }
