@@ -1,0 +1,14 @@
+﻿<Window x:Class="Quan_Ly_Bao_Tang.View.Login"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Quan_Ly_Bao_Tang.View"
+        xmlns:local="clr-namespace:Quan_Ly_Bao_Tang"
+        xmlns:local="clr-namespace:Quan_Ly_Bao_Tang.UserControl"
+        mc:Ignorable="d"
+        Title="Login" Height="450" Width="800">
+    <StackPanel>
+        <local:LoginUserControl></local:LoginUserControl>
+    </StackPanel>
+</Window>
