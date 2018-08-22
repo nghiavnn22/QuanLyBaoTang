@@ -6,10 +6,8 @@
              xmlns:local="clr-namespace:Quan_Ly_Bao_Tang.UserControl"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-        <UserControl.Resources> 
-            <BooleanToVisibilityConverter x:Key="BoolVisibilityConverter"/> 
-        </UserControl.Resources> 
-        <Grid x:Name="LoginLayer" Background="#B0000000" Visibility="{Binding AuthVM.IsNotAuthenticated, Converter={StaticResource BoolVisibilityConverter}}"> 
+        
+        <Grid> 
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightBlue"> 
                 <Grid.ColumnDefinitions> 
                     <ColumnDefinition/> 
@@ -23,10 +21,10 @@
                 </Grid.RowDefinitions> 
                 <TextBlock Text="Log in" Grid.ColumnSpan="2" FontWeight="Bold" HorizontalAlignment="Center" Margin="5" FontSize="20"/> 
                 <TextBlock Text="Name" Grid.Row="1" Margin="3"/> 
-                <TextBox x:Name="txtName" Text="{Binding AuthVM.CurrentUser.UserName}" Grid.Row="1" Grid.Column="1" Margin="3" MinWidth="100" HorizontalAlignment="Left"/> 
+                <TextBox  Grid.Row="1" Grid.Column="1" Margin="3" MinWidth="100" HorizontalAlignment="Left"/> 
                 <TextBlock Text="Password" Grid.Row="2" Margin="3"/> 
-                <TextBox x:Name="txtPassword" Text="{Binding AuthVM.CurrentUser.Password}" Grid.Column="1" Grid.Row="2" Margin="3" MinWidth="100" HorizontalAlignment="Left"/> 
-                <Button Command="{Binding LoginCommand}" Content="Log in" Grid.Row="3" Grid.Column="1" Margin="3"/> 
+                <TextBox  Grid.Column="1" Grid.Row="2" Margin="3" MinWidth="100" HorizontalAlignment="Left"/> 
+                <Button  Content="Log in" Grid.Row="3" Grid.Column="1" Margin="3"/> 
             </Grid> 
         </Grid> 
 </UserControl>

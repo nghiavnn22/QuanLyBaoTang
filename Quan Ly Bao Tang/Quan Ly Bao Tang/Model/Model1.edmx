@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QuanLyBaoTangModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BaoCao">
+          <Key>
+            <PropertyRef Name="IDBaoCao" />
+          </Key>
+          <Property Name="IDBaoCao" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenBaoCao" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'QuanLyBaoTang.dbo.DonViCungCap' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="DonViCungCap">
+          <Property Name="IDDonVi" Type="nvarchar" MaxLength="50" />
+          <Property Name="TenDonVi" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'QuanLyBaoTang.dbo.HienVat' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="HienVat">
+          <Property Name="IDHienVat" Type="nvarchar" MaxLength="50" />
+          <Property Name="TenHV" Type="nvarchar" MaxLength="50" />
+          <Property Name="DonViTinh" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgayThem" Type="datetime" />
+          <Property Name="NgaySua" Type="datetime" />
+          <Property Name="IDDonViCungCap" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDKhuVuc" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDBaoCao" Type="nvarchar" MaxLength="50" />
+          <Property Name="SoLuong" Type="nvarchar" MaxLength="50" />
+          <Property Name="ThongTinKhac" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'QuanLyBaoTang.dbo.HistoryNhanVien' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="HistoryNhanVien">
+          <Property Name="IDHistoryNhanVien" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDNhanVien" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgayThemNhanVIen" Type="datetime" />
+          <Property Name="NgayXoaNhanVien" Type="datetime" />
+        </EntityType>-->
+        <EntityType Name="KhuVuc">
+          <Key>
+            <PropertyRef Name="IDKhuVuc" />
+          </Key>
+          <Property Name="IDKhuVuc" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenKhuVuc" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="IDNhanVien" />
+          </Key>
+          <Property Name="IDNhanVien" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenNhanVien" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDQuyen" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="QuyenHan">
+          <Key>
+            <PropertyRef Name="IDQuyen" />
+          </Key>
+          <Property Name="IDQuyen" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenQuyen" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ThongKe">
+          <Key>
+            <PropertyRef Name="IDThongKe" />
+          </Key>
+          <Property Name="IDThongKe" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ChiTietThongKe" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="QuanLyBaoTangModelStoreContainer">
+          <EntitySet Name="BaoCao" EntityType="Self.BaoCao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KhuVuc" EntityType="Self.KhuVuc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuyenHan" EntityType="Self.QuyenHan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThongKe" EntityType="Self.ThongKe" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QuanLyBaoTangModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BaoCao">
+          <Key>
+            <PropertyRef Name="IDBaoCao" />
+          </Key>
+          <Property Name="IDBaoCao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenBaoCao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="KhuVuc">
+          <Key>
+            <PropertyRef Name="IDKhuVuc" />
+          </Key>
+          <Property Name="IDKhuVuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenKhuVuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="NhanVien">
+          <Key>
+            <PropertyRef Name="IDNhanVien" />
+          </Key>
+          <Property Name="IDNhanVien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenNhanVien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDQuyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="QuyenHan">
+          <Key>
+            <PropertyRef Name="IDQuyen" />
+          </Key>
+          <Property Name="IDQuyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenQuyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ThongKe">
+          <Key>
+            <PropertyRef Name="IDThongKe" />
+          </Key>
+          <Property Name="IDThongKe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ChiTietThongKe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="QuanLyBaoTangEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BaoCaos" EntityType="Self.BaoCao" />
+          <EntitySet Name="KhuVucs" EntityType="Self.KhuVuc" />
+          <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
+          <EntitySet Name="QuyenHans" EntityType="Self.QuyenHan" />
+          <EntitySet Name="ThongKes" EntityType="Self.ThongKe" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QuanLyBaoTangModelStoreContainer" CdmEntityContainer="QuanLyBaoTangEntities3">
+          <EntitySetMapping Name="BaoCaos">
+            <EntityTypeMapping TypeName="QuanLyBaoTangModel.BaoCao">
+              <MappingFragment StoreEntitySet="BaoCao">
+                <ScalarProperty Name="IDBaoCao" ColumnName="IDBaoCao" />
+                <ScalarProperty Name="TenBaoCao" ColumnName="TenBaoCao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KhuVucs">
+            <EntityTypeMapping TypeName="QuanLyBaoTangModel.KhuVuc">
+              <MappingFragment StoreEntitySet="KhuVuc">
+                <ScalarProperty Name="IDKhuVuc" ColumnName="IDKhuVuc" />
+                <ScalarProperty Name="TenKhuVuc" ColumnName="TenKhuVuc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NhanViens">
+            <EntityTypeMapping TypeName="QuanLyBaoTangModel.NhanVien">
+              <MappingFragment StoreEntitySet="NhanVien">
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="TenNhanVien" ColumnName="TenNhanVien" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="IDQuyen" ColumnName="IDQuyen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuyenHans">
+            <EntityTypeMapping TypeName="QuanLyBaoTangModel.QuyenHan">
+              <MappingFragment StoreEntitySet="QuyenHan">
+                <ScalarProperty Name="IDQuyen" ColumnName="IDQuyen" />
+                <ScalarProperty Name="TenQuyen" ColumnName="TenQuyen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThongKes">
+            <EntityTypeMapping TypeName="QuanLyBaoTangModel.ThongKe">
+              <MappingFragment StoreEntitySet="ThongKe">
+                <ScalarProperty Name="IDThongKe" ColumnName="IDThongKe" />
+                <ScalarProperty Name="ChiTietThongKe" ColumnName="ChiTietThongKe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
