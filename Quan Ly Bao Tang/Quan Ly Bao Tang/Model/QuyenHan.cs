@@ -14,7 +14,16 @@ namespace Quan_Ly_Bao_Tang.Model
     
     public partial class QuyenHan
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public QuyenHan()
+        {
+            this.NhanViens = new HashSet<NhanVien>();
+        }
+    
         public string IDQuyen { get; set; }
         public string TenQuyen { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NhanVien> NhanViens { get; set; }
     }
 }

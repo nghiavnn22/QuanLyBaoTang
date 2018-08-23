@@ -4,12 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5d6940cf369842a2831b8b22972c74fc" Name="Diagram1">
-        <EntityTypeShape EntityType="QuanLyBaoTangModel.BaoCao" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyBaoTangModel.KhuVuc" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyBaoTangModel.NhanVien" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyBaoTangModel.QuyenHan" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QuanLyBaoTangModel.ThongKe" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="19cccc0ab2ee49189dd04a84e9f20a21" Name="Diagram1">
+        <EntityTypeShape EntityType="QuanLyBaoTangModel.BaoCao" Width="1.5" PointX="10.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBaoTangModel.DonViCungCap" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBaoTangModel.HienVat" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBaoTangModel.HienVatXuatNhap" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBaoTangModel.HistoryNhanVIen" Width="1.5" PointX="10.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBaoTangModel.KhuVuc" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBaoTangModel.LoaiHienVat" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBaoTangModel.NhanVien" Width="1.5" PointX="8" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBaoTangModel.QuyenHan" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBaoTangModel.ThongKe" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="QuanLyBaoTangModel.FK_BaoCao_NhanVien" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyBaoTangModel.FK_HienVat_DonViCungCap" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyBaoTangModel.FK_HienVat_KhuVuc" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyBaoTangModel.FK_HienVat_LoaiHienVat" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyBaoTangModel.FK_HienVatXuatNhap_HienVat" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyBaoTangModel.FK_HistoryNhanVIen_NhanVien" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLyBaoTangModel.FK_NhanVien_QuyenHan" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

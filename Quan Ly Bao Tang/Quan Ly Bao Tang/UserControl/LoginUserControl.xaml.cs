@@ -23,6 +23,7 @@ namespace Quan_Ly_Bao_Tang.UserControl
         public LoginUserControl()
         {
             InitializeComponent();
+            this.
         }
     }
 }

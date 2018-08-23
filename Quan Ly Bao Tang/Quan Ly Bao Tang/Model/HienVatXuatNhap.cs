@@ -12,14 +12,12 @@ namespace Quan_Ly_Bao_Tang.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class BaoCao
+    public partial class HienVatXuatNhap
     {
-        public string IDBaoCao { get; set; }
-        public string TenBaoCao { get; set; }
-        public Nullable<System.DateTime> NgayBaoCao { get; set; }
-        public string NhanVienBaoCao { get; set; }
-        public string MaXuatNhapHienVat { get; set; }
+        public string IDHienVatXuatNhap { get; set; }
+        public string IDHienVat { get; set; }
+        public Nullable<int> SoLuong { get; set; }
     
-        public virtual NhanVien NhanVien { get; set; }
+        public virtual HienVat HienVat { get; set; }
     }
 }

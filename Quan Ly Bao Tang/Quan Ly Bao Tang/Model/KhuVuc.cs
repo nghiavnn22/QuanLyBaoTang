@@ -14,7 +14,18 @@ namespace Quan_Ly_Bao_Tang.Model
     
     public partial class KhuVuc
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public KhuVuc()
+        {
+            this.HienVats = new HashSet<HienVat>();
+        }
+    
         public string IDKhuVuc { get; set; }
         public string TenKhuVuc { get; set; }
+        public Nullable<int> KichThuoc { get; set; }
+        public Nullable<int> MaxSizeHienVat { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HienVat> HienVats { get; set; }
     }
 }

@@ -13,10 +13,10 @@ namespace Quan_Ly_Bao_Tang.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QuanLyBaoTangEntities3 : DbContext
+    public partial class QuanLyBaoTangEntities6 : DbContext
     {
-        public QuanLyBaoTangEntities3()
-            : base("name=QuanLyBaoTangEntities3")
+        public QuanLyBaoTangEntities6()
+            : base("name=QuanLyBaoTangEntities6")
         {
         }
     
@@ -26,7 +26,12 @@ namespace Quan_Ly_Bao_Tang.Model
         }
     
         public virtual DbSet<BaoCao> BaoCaos { get; set; }
+        public virtual DbSet<DonViCungCap> DonViCungCaps { get; set; }
+        public virtual DbSet<HienVat> HienVats { get; set; }
+        public virtual DbSet<HienVatXuatNhap> HienVatXuatNhaps { get; set; }
+        public virtual DbSet<HistoryNhanVIen> HistoryNhanVIens { get; set; }
         public virtual DbSet<KhuVuc> KhuVucs { get; set; }
+        public virtual DbSet<LoaiHienVat> LoaiHienVats { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
         public virtual DbSet<QuyenHan> QuyenHans { get; set; }
         public virtual DbSet<ThongKe> ThongKes { get; set; }

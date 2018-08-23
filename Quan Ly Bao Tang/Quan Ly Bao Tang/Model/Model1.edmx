@@ -11,44 +11,71 @@
           </Key>
           <Property Name="IDBaoCao" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TenBaoCao" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgayBaoCao" Type="datetime" />
+          <Property Name="NhanVienBaoCao" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaXuatNhapHienVat" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'QuanLyBaoTang.dbo.DonViCungCap' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="DonViCungCap">
-          <Property Name="IDDonVi" Type="nvarchar" MaxLength="50" />
+          <Key>
+            <PropertyRef Name="IDDonVi" />
+          </Key>
+          <Property Name="IDDonVi" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TenDonVi" Type="nvarchar" MaxLength="50" />
           <Property Name="DiaChi" Type="nvarchar" MaxLength="50" />
           <Property Name="SDT" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'QuanLyBaoTang.dbo.HienVat' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        </EntityType>
         <EntityType Name="HienVat">
-          <Property Name="IDHienVat" Type="nvarchar" MaxLength="50" />
+          <Key>
+            <PropertyRef Name="IDHienVat" />
+          </Key>
+          <Property Name="IDHienVat" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TenHV" Type="nvarchar" MaxLength="50" />
           <Property Name="DonViTinh" Type="nvarchar" MaxLength="50" />
           <Property Name="NgayThem" Type="datetime" />
           <Property Name="NgaySua" Type="datetime" />
           <Property Name="IDDonViCungCap" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDLoaiHienVat" Type="nvarchar" MaxLength="50" />
           <Property Name="IDKhuVuc" Type="nvarchar" MaxLength="50" />
           <Property Name="IDBaoCao" Type="nvarchar" MaxLength="50" />
+          <Property Name="DoUuTien" Type="nvarchar" MaxLength="50" />
           <Property Name="SoLuong" Type="nvarchar" MaxLength="50" />
           <Property Name="ThongTinKhac" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'QuanLyBaoTang.dbo.HistoryNhanVien' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="HistoryNhanVien">
-          <Property Name="IDHistoryNhanVien" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HienVatXuatNhap">
+          <Key>
+            <PropertyRef Name="IDHienVatXuatNhap" />
+          </Key>
+          <Property Name="IDHienVatXuatNhap" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDHienVat" Type="nvarchar" MaxLength="50" />
+          <Property Name="SoLuong" Type="int" />
+        </EntityType>
+        <EntityType Name="HistoryNhanVIen">
+          <Key>
+            <PropertyRef Name="IDHistoryNhanVien" />
+          </Key>
+          <Property Name="IDHistoryNhanVien" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IDNhanVien" Type="nvarchar" MaxLength="50" />
           <Property Name="NgayThemNhanVIen" Type="datetime" />
           <Property Name="NgayXoaNhanVien" Type="datetime" />
-        </EntityType>-->
+        </EntityType>
         <EntityType Name="KhuVuc">
           <Key>
             <PropertyRef Name="IDKhuVuc" />
           </Key>
           <Property Name="IDKhuVuc" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TenKhuVuc" Type="nvarchar" MaxLength="50" />
+          <Property Name="KichThuoc" Type="int" />
+          <Property Name="MaxSizeHienVat" Type="int" />
+        </EntityType>
+        <EntityType Name="LoaiHienVat">
+          <Key>
+            <PropertyRef Name="IDLoaiHienVat" />
+          </Key>
+          <Property Name="IDLoaiHienVat" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenLoaiHienVat" Type="nvarchar" MaxLength="50" />
+          <Property Name="DVTinh" Type="nvarchar" MaxLength="50" />
+          <Property Name="KichThuoc" Type="int" />
         </EntityType>
         <EntityType Name="NhanVien">
           <Key>
@@ -75,12 +102,129 @@ warning 6013: The table/view 'QuanLyBaoTang.dbo.HistoryNhanVien' does not have a
           <Property Name="IDThongKe" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ChiTietThongKe" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_BaoCao_NhanVien">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+          <End Role="BaoCao" Type="Self.BaoCao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="IDNhanVien" />
+            </Principal>
+            <Dependent Role="BaoCao">
+              <PropertyRef Name="NhanVienBaoCao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HienVat_DonViCungCap">
+          <End Role="DonViCungCap" Type="Self.DonViCungCap" Multiplicity="0..1" />
+          <End Role="HienVat" Type="Self.HienVat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DonViCungCap">
+              <PropertyRef Name="IDDonVi" />
+            </Principal>
+            <Dependent Role="HienVat">
+              <PropertyRef Name="IDDonViCungCap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HienVat_KhuVuc">
+          <End Role="KhuVuc" Type="Self.KhuVuc" Multiplicity="0..1" />
+          <End Role="HienVat" Type="Self.HienVat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhuVuc">
+              <PropertyRef Name="IDKhuVuc" />
+            </Principal>
+            <Dependent Role="HienVat">
+              <PropertyRef Name="IDKhuVuc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HienVat_LoaiHienVat">
+          <End Role="LoaiHienVat" Type="Self.LoaiHienVat" Multiplicity="0..1" />
+          <End Role="HienVat" Type="Self.HienVat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiHienVat">
+              <PropertyRef Name="IDLoaiHienVat" />
+            </Principal>
+            <Dependent Role="HienVat">
+              <PropertyRef Name="IDLoaiHienVat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HienVatXuatNhap_HienVat">
+          <End Role="HienVat" Type="Self.HienVat" Multiplicity="0..1" />
+          <End Role="HienVatXuatNhap" Type="Self.HienVatXuatNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HienVat">
+              <PropertyRef Name="IDHienVat" />
+            </Principal>
+            <Dependent Role="HienVatXuatNhap">
+              <PropertyRef Name="IDHienVat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryNhanVIen_NhanVien">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+          <End Role="HistoryNhanVIen" Type="Self.HistoryNhanVIen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="IDNhanVien" />
+            </Principal>
+            <Dependent Role="HistoryNhanVIen">
+              <PropertyRef Name="IDNhanVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NhanVien_QuyenHan">
+          <End Role="QuyenHan" Type="Self.QuyenHan" Multiplicity="0..1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuyenHan">
+              <PropertyRef Name="IDQuyen" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="IDQuyen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="QuanLyBaoTangModelStoreContainer">
           <EntitySet Name="BaoCao" EntityType="Self.BaoCao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DonViCungCap" EntityType="Self.DonViCungCap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HienVat" EntityType="Self.HienVat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HienVatXuatNhap" EntityType="Self.HienVatXuatNhap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistoryNhanVIen" EntityType="Self.HistoryNhanVIen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KhuVuc" EntityType="Self.KhuVuc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoaiHienVat" EntityType="Self.LoaiHienVat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QuyenHan" EntityType="Self.QuyenHan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThongKe" EntityType="Self.ThongKe" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BaoCao_NhanVien" Association="Self.FK_BaoCao_NhanVien">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="BaoCao" EntitySet="BaoCao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HienVat_DonViCungCap" Association="Self.FK_HienVat_DonViCungCap">
+            <End Role="DonViCungCap" EntitySet="DonViCungCap" />
+            <End Role="HienVat" EntitySet="HienVat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HienVat_KhuVuc" Association="Self.FK_HienVat_KhuVuc">
+            <End Role="KhuVuc" EntitySet="KhuVuc" />
+            <End Role="HienVat" EntitySet="HienVat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HienVat_LoaiHienVat" Association="Self.FK_HienVat_LoaiHienVat">
+            <End Role="LoaiHienVat" EntitySet="LoaiHienVat" />
+            <End Role="HienVat" EntitySet="HienVat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HienVatXuatNhap_HienVat" Association="Self.FK_HienVatXuatNhap_HienVat">
+            <End Role="HienVat" EntitySet="HienVat" />
+            <End Role="HienVatXuatNhap" EntitySet="HienVatXuatNhap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryNhanVIen_NhanVien" Association="Self.FK_HistoryNhanVIen_NhanVien">
+            <End Role="NhanVien" EntitySet="NhanVien" />
+            <End Role="HistoryNhanVIen" EntitySet="HistoryNhanVIen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NhanVien_QuyenHan" Association="Self.FK_NhanVien_QuyenHan">
+            <End Role="QuyenHan" EntitySet="QuyenHan" />
+            <End Role="NhanVien" EntitySet="NhanVien" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -93,6 +237,61 @@ warning 6013: The table/view 'QuanLyBaoTang.dbo.HistoryNhanVien' does not have a
           </Key>
           <Property Name="IDBaoCao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TenBaoCao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgayBaoCao" Type="DateTime" Precision="3" />
+          <Property Name="NhanVienBaoCao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaXuatNhapHienVat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NhanVien" Relationship="Self.FK_BaoCao_NhanVien" FromRole="BaoCao" ToRole="NhanVien" />
+        </EntityType>
+        <EntityType Name="DonViCungCap">
+          <Key>
+            <PropertyRef Name="IDDonVi" />
+          </Key>
+          <Property Name="IDDonVi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenDonVi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HienVats" Relationship="Self.FK_HienVat_DonViCungCap" FromRole="DonViCungCap" ToRole="HienVat" />
+        </EntityType>
+        <EntityType Name="HienVat">
+          <Key>
+            <PropertyRef Name="IDHienVat" />
+          </Key>
+          <Property Name="IDHienVat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenHV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DonViTinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgayThem" Type="DateTime" Precision="3" />
+          <Property Name="NgaySua" Type="DateTime" Precision="3" />
+          <Property Name="IDDonViCungCap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDLoaiHienVat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDKhuVuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDBaoCao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DoUuTien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoLuong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ThongTinKhac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DonViCungCap" Relationship="Self.FK_HienVat_DonViCungCap" FromRole="HienVat" ToRole="DonViCungCap" />
+          <NavigationProperty Name="KhuVuc" Relationship="Self.FK_HienVat_KhuVuc" FromRole="HienVat" ToRole="KhuVuc" />
+          <NavigationProperty Name="LoaiHienVat" Relationship="Self.FK_HienVat_LoaiHienVat" FromRole="HienVat" ToRole="LoaiHienVat" />
+          <NavigationProperty Name="HienVatXuatNhaps" Relationship="Self.FK_HienVatXuatNhap_HienVat" FromRole="HienVat" ToRole="HienVatXuatNhap" />
+        </EntityType>
+        <EntityType Name="HienVatXuatNhap">
+          <Key>
+            <PropertyRef Name="IDHienVatXuatNhap" />
+          </Key>
+          <Property Name="IDHienVatXuatNhap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IDHienVat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoLuong" Type="Int32" />
+          <NavigationProperty Name="HienVat" Relationship="Self.FK_HienVatXuatNhap_HienVat" FromRole="HienVatXuatNhap" ToRole="HienVat" />
+        </EntityType>
+        <EntityType Name="HistoryNhanVIen">
+          <Key>
+            <PropertyRef Name="IDHistoryNhanVien" />
+          </Key>
+          <Property Name="IDHistoryNhanVien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IDNhanVien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgayThemNhanVIen" Type="DateTime" Precision="3" />
+          <Property Name="NgayXoaNhanVien" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="NhanVien" Relationship="Self.FK_HistoryNhanVIen_NhanVien" FromRole="HistoryNhanVIen" ToRole="NhanVien" />
         </EntityType>
         <EntityType Name="KhuVuc">
           <Key>
@@ -100,6 +299,19 @@ warning 6013: The table/view 'QuanLyBaoTang.dbo.HistoryNhanVien' does not have a
           </Key>
           <Property Name="IDKhuVuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TenKhuVuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KichThuoc" Type="Int32" />
+          <Property Name="MaxSizeHienVat" Type="Int32" />
+          <NavigationProperty Name="HienVats" Relationship="Self.FK_HienVat_KhuVuc" FromRole="KhuVuc" ToRole="HienVat" />
+        </EntityType>
+        <EntityType Name="LoaiHienVat">
+          <Key>
+            <PropertyRef Name="IDLoaiHienVat" />
+          </Key>
+          <Property Name="IDLoaiHienVat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenLoaiHienVat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DVTinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KichThuoc" Type="Int32" />
+          <NavigationProperty Name="HienVats" Relationship="Self.FK_HienVat_LoaiHienVat" FromRole="LoaiHienVat" ToRole="HienVat" />
         </EntityType>
         <EntityType Name="NhanVien">
           <Key>
@@ -111,6 +323,9 @@ warning 6013: The table/view 'QuanLyBaoTang.dbo.HistoryNhanVien' does not have a
           <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DiaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IDQuyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BaoCaos" Relationship="Self.FK_BaoCao_NhanVien" FromRole="NhanVien" ToRole="BaoCao" />
+          <NavigationProperty Name="HistoryNhanVIens" Relationship="Self.FK_HistoryNhanVIen_NhanVien" FromRole="NhanVien" ToRole="HistoryNhanVIen" />
+          <NavigationProperty Name="QuyenHan" Relationship="Self.FK_NhanVien_QuyenHan" FromRole="NhanVien" ToRole="QuyenHan" />
         </EntityType>
         <EntityType Name="QuyenHan">
           <Key>
@@ -118,6 +333,7 @@ warning 6013: The table/view 'QuanLyBaoTang.dbo.HistoryNhanVien' does not have a
           </Key>
           <Property Name="IDQuyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TenQuyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NhanViens" Relationship="Self.FK_NhanVien_QuyenHan" FromRole="QuyenHan" ToRole="NhanVien" />
         </EntityType>
         <EntityType Name="ThongKe">
           <Key>
@@ -126,24 +342,192 @@ warning 6013: The table/view 'QuanLyBaoTang.dbo.HistoryNhanVien' does not have a
           <Property Name="IDThongKe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ChiTietThongKe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="QuanLyBaoTangEntities3" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_BaoCao_NhanVien">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+          <End Role="BaoCao" Type="Self.BaoCao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="IDNhanVien" />
+            </Principal>
+            <Dependent Role="BaoCao">
+              <PropertyRef Name="NhanVienBaoCao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HienVat_DonViCungCap">
+          <End Role="DonViCungCap" Type="Self.DonViCungCap" Multiplicity="0..1" />
+          <End Role="HienVat" Type="Self.HienVat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DonViCungCap">
+              <PropertyRef Name="IDDonVi" />
+            </Principal>
+            <Dependent Role="HienVat">
+              <PropertyRef Name="IDDonViCungCap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HienVat_KhuVuc">
+          <End Role="KhuVuc" Type="Self.KhuVuc" Multiplicity="0..1" />
+          <End Role="HienVat" Type="Self.HienVat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhuVuc">
+              <PropertyRef Name="IDKhuVuc" />
+            </Principal>
+            <Dependent Role="HienVat">
+              <PropertyRef Name="IDKhuVuc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HienVat_LoaiHienVat">
+          <End Role="LoaiHienVat" Type="Self.LoaiHienVat" Multiplicity="0..1" />
+          <End Role="HienVat" Type="Self.HienVat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LoaiHienVat">
+              <PropertyRef Name="IDLoaiHienVat" />
+            </Principal>
+            <Dependent Role="HienVat">
+              <PropertyRef Name="IDLoaiHienVat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HienVatXuatNhap_HienVat">
+          <End Role="HienVat" Type="Self.HienVat" Multiplicity="0..1" />
+          <End Role="HienVatXuatNhap" Type="Self.HienVatXuatNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HienVat">
+              <PropertyRef Name="IDHienVat" />
+            </Principal>
+            <Dependent Role="HienVatXuatNhap">
+              <PropertyRef Name="IDHienVat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HistoryNhanVIen_NhanVien">
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+          <End Role="HistoryNhanVIen" Type="Self.HistoryNhanVIen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhanVien">
+              <PropertyRef Name="IDNhanVien" />
+            </Principal>
+            <Dependent Role="HistoryNhanVIen">
+              <PropertyRef Name="IDNhanVien" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NhanVien_QuyenHan">
+          <End Role="QuyenHan" Type="Self.QuyenHan" Multiplicity="0..1" />
+          <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuyenHan">
+              <PropertyRef Name="IDQuyen" />
+            </Principal>
+            <Dependent Role="NhanVien">
+              <PropertyRef Name="IDQuyen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanLyBaoTangEntities6" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BaoCaos" EntityType="Self.BaoCao" />
+          <EntitySet Name="DonViCungCaps" EntityType="Self.DonViCungCap" />
+          <EntitySet Name="HienVats" EntityType="Self.HienVat" />
+          <EntitySet Name="HienVatXuatNhaps" EntityType="Self.HienVatXuatNhap" />
+          <EntitySet Name="HistoryNhanVIens" EntityType="Self.HistoryNhanVIen" />
           <EntitySet Name="KhuVucs" EntityType="Self.KhuVuc" />
+          <EntitySet Name="LoaiHienVats" EntityType="Self.LoaiHienVat" />
           <EntitySet Name="NhanViens" EntityType="Self.NhanVien" />
           <EntitySet Name="QuyenHans" EntityType="Self.QuyenHan" />
           <EntitySet Name="ThongKes" EntityType="Self.ThongKe" />
+          <AssociationSet Name="FK_BaoCao_NhanVien" Association="Self.FK_BaoCao_NhanVien">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="BaoCao" EntitySet="BaoCaos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HienVat_DonViCungCap" Association="Self.FK_HienVat_DonViCungCap">
+            <End Role="DonViCungCap" EntitySet="DonViCungCaps" />
+            <End Role="HienVat" EntitySet="HienVats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HienVat_KhuVuc" Association="Self.FK_HienVat_KhuVuc">
+            <End Role="KhuVuc" EntitySet="KhuVucs" />
+            <End Role="HienVat" EntitySet="HienVats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HienVat_LoaiHienVat" Association="Self.FK_HienVat_LoaiHienVat">
+            <End Role="LoaiHienVat" EntitySet="LoaiHienVats" />
+            <End Role="HienVat" EntitySet="HienVats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HienVatXuatNhap_HienVat" Association="Self.FK_HienVatXuatNhap_HienVat">
+            <End Role="HienVat" EntitySet="HienVats" />
+            <End Role="HienVatXuatNhap" EntitySet="HienVatXuatNhaps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HistoryNhanVIen_NhanVien" Association="Self.FK_HistoryNhanVIen_NhanVien">
+            <End Role="NhanVien" EntitySet="NhanViens" />
+            <End Role="HistoryNhanVIen" EntitySet="HistoryNhanVIens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NhanVien_QuyenHan" Association="Self.FK_NhanVien_QuyenHan">
+            <End Role="QuyenHan" EntitySet="QuyenHans" />
+            <End Role="NhanVien" EntitySet="NhanViens" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QuanLyBaoTangModelStoreContainer" CdmEntityContainer="QuanLyBaoTangEntities3">
+        <EntityContainerMapping StorageEntityContainer="QuanLyBaoTangModelStoreContainer" CdmEntityContainer="QuanLyBaoTangEntities6">
           <EntitySetMapping Name="BaoCaos">
             <EntityTypeMapping TypeName="QuanLyBaoTangModel.BaoCao">
               <MappingFragment StoreEntitySet="BaoCao">
                 <ScalarProperty Name="IDBaoCao" ColumnName="IDBaoCao" />
                 <ScalarProperty Name="TenBaoCao" ColumnName="TenBaoCao" />
+                <ScalarProperty Name="NgayBaoCao" ColumnName="NgayBaoCao" />
+                <ScalarProperty Name="NhanVienBaoCao" ColumnName="NhanVienBaoCao" />
+                <ScalarProperty Name="MaXuatNhapHienVat" ColumnName="MaXuatNhapHienVat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DonViCungCaps">
+            <EntityTypeMapping TypeName="QuanLyBaoTangModel.DonViCungCap">
+              <MappingFragment StoreEntitySet="DonViCungCap">
+                <ScalarProperty Name="IDDonVi" ColumnName="IDDonVi" />
+                <ScalarProperty Name="TenDonVi" ColumnName="TenDonVi" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HienVats">
+            <EntityTypeMapping TypeName="QuanLyBaoTangModel.HienVat">
+              <MappingFragment StoreEntitySet="HienVat">
+                <ScalarProperty Name="IDHienVat" ColumnName="IDHienVat" />
+                <ScalarProperty Name="TenHV" ColumnName="TenHV" />
+                <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
+                <ScalarProperty Name="NgayThem" ColumnName="NgayThem" />
+                <ScalarProperty Name="NgaySua" ColumnName="NgaySua" />
+                <ScalarProperty Name="IDDonViCungCap" ColumnName="IDDonViCungCap" />
+                <ScalarProperty Name="IDLoaiHienVat" ColumnName="IDLoaiHienVat" />
+                <ScalarProperty Name="IDKhuVuc" ColumnName="IDKhuVuc" />
+                <ScalarProperty Name="IDBaoCao" ColumnName="IDBaoCao" />
+                <ScalarProperty Name="DoUuTien" ColumnName="DoUuTien" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="ThongTinKhac" ColumnName="ThongTinKhac" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HienVatXuatNhaps">
+            <EntityTypeMapping TypeName="QuanLyBaoTangModel.HienVatXuatNhap">
+              <MappingFragment StoreEntitySet="HienVatXuatNhap">
+                <ScalarProperty Name="IDHienVatXuatNhap" ColumnName="IDHienVatXuatNhap" />
+                <ScalarProperty Name="IDHienVat" ColumnName="IDHienVat" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistoryNhanVIens">
+            <EntityTypeMapping TypeName="QuanLyBaoTangModel.HistoryNhanVIen">
+              <MappingFragment StoreEntitySet="HistoryNhanVIen">
+                <ScalarProperty Name="IDHistoryNhanVien" ColumnName="IDHistoryNhanVien" />
+                <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+                <ScalarProperty Name="NgayThemNhanVIen" ColumnName="NgayThemNhanVIen" />
+                <ScalarProperty Name="NgayXoaNhanVien" ColumnName="NgayXoaNhanVien" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -152,6 +536,18 @@ warning 6013: The table/view 'QuanLyBaoTang.dbo.HistoryNhanVien' does not have a
               <MappingFragment StoreEntitySet="KhuVuc">
                 <ScalarProperty Name="IDKhuVuc" ColumnName="IDKhuVuc" />
                 <ScalarProperty Name="TenKhuVuc" ColumnName="TenKhuVuc" />
+                <ScalarProperty Name="KichThuoc" ColumnName="KichThuoc" />
+                <ScalarProperty Name="MaxSizeHienVat" ColumnName="MaxSizeHienVat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoaiHienVats">
+            <EntityTypeMapping TypeName="QuanLyBaoTangModel.LoaiHienVat">
+              <MappingFragment StoreEntitySet="LoaiHienVat">
+                <ScalarProperty Name="IDLoaiHienVat" ColumnName="IDLoaiHienVat" />
+                <ScalarProperty Name="TenLoaiHienVat" ColumnName="TenLoaiHienVat" />
+                <ScalarProperty Name="DVTinh" ColumnName="DVTinh" />
+                <ScalarProperty Name="KichThuoc" ColumnName="KichThuoc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

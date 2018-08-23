@@ -12,26 +12,20 @@ namespace Quan_Ly_Bao_Tang.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class NhanVien
+    public partial class LoaiHienVat
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NhanVien()
+        public LoaiHienVat()
         {
-            this.BaoCaos = new HashSet<BaoCao>();
-            this.HistoryNhanVIens = new HashSet<HistoryNhanVIen>();
+            this.HienVats = new HashSet<HienVat>();
         }
     
-        public string IDNhanVien { get; set; }
-        public string TenNhanVien { get; set; }
-        public string Email { get; set; }
-        public string SDT { get; set; }
-        public string DiaChi { get; set; }
-        public string IDQuyen { get; set; }
+        public string IDLoaiHienVat { get; set; }
+        public string TenLoaiHienVat { get; set; }
+        public string DVTinh { get; set; }
+        public Nullable<int> KichThuoc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BaoCao> BaoCaos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HistoryNhanVIen> HistoryNhanVIens { get; set; }
-        public virtual QuyenHan QuyenHan { get; set; }
+        public virtual ICollection<HienVat> HienVats { get; set; }
     }
 }
